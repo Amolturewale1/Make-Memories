@@ -12,6 +12,7 @@ import com.jsp.SaveImage.entity.Images;
 public interface ImagesService {
 	
 	 public Images create(Images image);
+	 
 	    public List<Images> viewAll(long UserId);
 	    
 	    public Images viewById(long id);
