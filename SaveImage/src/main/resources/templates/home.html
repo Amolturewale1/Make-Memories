@@ -34,7 +34,7 @@
          }
          .custom-heading {
          	
-            font-family: Copperplate, fantasy,Geneva, Verdana, sans-serif; /* Change to desired font-family */
+            font-family: Copperplate,Geneva, Verdana, sans-serif; /* Change to desired font-family */
             font-size: 3em; /* Adjust size as needed */
             color: white; /* Text color */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add shadow for effect */
@@ -188,7 +188,7 @@
     background-color: #388e3c;
 }
 .navbar-brand{
-	font-family:  Pacifico; /* Change to desired font-family */
+	font-family:  Pacifico, Copperplate, fantasy,Geneva, Verdana, sans-serif; /* Change to desired font-family */
             font-size: 2em; /* Adjust size as needed */
             color: black; /* Text color */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add shadow for effect */
@@ -240,9 +240,11 @@
         <div class="row">
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4" th:each="list : ${imageList}">
                 <div class="card gradient-card">
-                    <div class="card-header">
-                        <small class="text-white" th:text="${list.date}"></small>
-                    </div>
+                   <div class="card-header">
+    					<small class="text-white" th:text="'Date '+${#dates.format(list.date, 'yyyy-MM-dd') + ' time ' + #dates.format(list.date, 'HH:mm')}"></small>
+					</div>
+
+
                     <img class="card-img-top" th:src="@{'/display?id=' + ${list.id}}" alt="Memory Image" style="width: 100%; height: auto;">
                     <div class="card-body">
                         <p class="card-text" th:text="${list.note}"></p>
