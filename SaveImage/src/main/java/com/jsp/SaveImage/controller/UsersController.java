@@ -61,7 +61,16 @@ public class UsersController {
                                  @RequestParam("password") String password, 
                                  @RequestParam("confirmPassword") String confirmPassword) {
 		
+		
 		ModelAndView modelAndView = new ModelAndView();
+		
+		boolean status =userService.getUserByEmail(email);
+		if(status) {
+			System.out.println();
+			modelAndView.setViewName("register");
+			modelAndView.addObject("error", "Registration failed. Email may already be in use.");
+			return modelAndView;
+		}
 		
         if (!password.equals(confirmPassword)) {
             modelAndView.setViewName("register");

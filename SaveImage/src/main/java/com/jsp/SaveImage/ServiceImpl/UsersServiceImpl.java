@@ -42,4 +42,13 @@ public class UsersServiceImpl implements UsersService {
 		return null;
 	}
 
+	@Override
+	public boolean getUserByEmail(String email) {
+		Users user= userRepository.findByEmail(email).orElse(null);
+		if(user!=null) {
+			return true;
+		}
+		return false;
+	}
+
 }

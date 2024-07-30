@@ -10,6 +10,8 @@ public interface UsersService {
 	
 	public boolean login(Users user);
 	
+	public boolean getUserByEmail(String email);
+	
 	public Users getUserByEmailAndPassword(Users user);
 
 }
