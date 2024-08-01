@@ -312,7 +312,7 @@
                     <div class="card gradient-card custom-card">
                         <div class="card-header d-flex justify-content-between">
                             <small class="text-white" th:text="${#dates.format(list.date, 'yyyy-MM-dd')}"></small>
-                            <small class="text-white" th:text="${#dates.format(list.date, 'HH:mm')}"></small>
+                           
                         </div>
                         <img class="card-img-top" th:src="@{'/display?id=' + ${list.id}}" alt="Memory Image" style="width: 100%; height: auto;">
                         <div class="card-body">

@@ -90,8 +90,10 @@
         <div class="card-body">
             <h2 class="text-center mb-3 custom-heading">Add Image</h2>
             <form action="/add" method="post" enctype="multipart/form-data">
+            	<label for="note" class="form-label">Add Image(Max 3MB)</label> 
                 <div class="input-group mb-3">
-                    <input type="file" class="form-control" id="image" name="image" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
+                	
+                     <input type="file" class="form-control" id="image" name="image"  aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
                 </div>
                 <div class="mb-3">
                     <label for="note" class="form-label">Description</label>
