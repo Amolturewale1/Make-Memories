@@ -192,15 +192,74 @@
             font-size: 2em; /* Adjust size as needed */
             color: black; /* Text color */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add shadow for effect */
-            margin-top: 0; /* Adjust top margin */
+            margin-top: 2px; /* Adjust top margin */
             margin-bottom:0;
+            
 }
 .pacifico-regular {
   font-family: "Pacifico", cursive;
   font-weight: 400;
   font-style: normal;
 }
+.custom-card {
+    height: auto;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
 
+@media (max-width: 767.98px) {
+    .custom-card {
+        height: 400px; /* Adjust height as needed */
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+.button-30 {
+    align-items: center;
+    appearance: none;
+    background-image: radial-gradient(100% 100% at 100% 0, #C31D7B 0, #C31D7B 100%);
+    border: 0;
+    border-radius: 6px;
+    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(195, 29, 123, .5) 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "JetBrains Mono", monospace;
+    height: 45px;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s, transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow, transform;
+    font-size: 18px;
+}
+
+.button-30:focus {
+    box-shadow: #C31D7B 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #C31D7B 0 -3px 0 inset;
+}
+
+.button-30:hover {
+    box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #C31D7B 0 -3px 0 inset;
+    transform: translateY(-2px);
+}
+
+.button-30:active {
+    box-shadow: #C31D7B 0 3px 7px inset;
+    transform: translateY(2px);
+}
 
         
     </style>
@@ -210,15 +269,22 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid">
+        	<div style="display:flex ; align-items:flex-end;">
         	<img height="50px" alt="MakeMemoriesIon" src="/image/favicon-32x32.png">
-            <a class="navbar-brand" href="/homeController">Makememories</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        	<a class="navbar-brand" href="/homeController">Makememories</a>
+            
+            <button type="button" class="button-30"><a class="nav-link" href="/add">Create New Memories</a></button>
+            </div>
+           
+            
+             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/add">Create New Memories</a>
+                    	
+                        
                     </li>
                    
                 </ul>
@@ -234,29 +300,33 @@
 	</div>
     <!-- View Images -->
     <!--Main Content-->
-   <div class="mt-5">
+<div class="mt-5">
     <h1 class="text-center custom-heading">Your Memories</h1>
     <div class="container" style="margin: 0; color: #ffffff">
-        <div class="row">
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4" th:each="list : ${imageList}">
-                <div class="card gradient-card">
-                   <div class="card-header">
-    					<small class="text-white" th:text="'Date '+${#dates.format(list.date, 'yyyy-MM-dd') + ' time ' + #dates.format(list.date, 'HH:mm')}"></small>
-					</div>
-
-
-                    <img class="card-img-top" th:src="@{'/display?id=' + ${list.id}}" alt="Memory Image" style="width: 100%; height: auto;">
-                    <div class="card-body">
-                        <p class="card-text" th:text="${list.note}"></p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="d-flex justify-content-between">
-                            <a th:href="@{'/update?id=' + ${list.id} + '&userId=' + ${list.user.id}}">
-                                <button type="button" class="button-29">Edit</button>
-                            </a>
-                            <a th:href="@{'/delete?id=' + ${list.id} + '&userId=' + ${list.user.id}}">
-                                <button type="button" class="button-28">Remove</button>
-                            </a>
+        <div th:if="${#lists.isEmpty(imageList)}">
+            <p class="text-center">No memories to display.</p>
+        </div>
+        <div th:if="${!#lists.isEmpty(imageList)}">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-6 col-lg-4 mb-4" th:each="list : ${imageList}">
+                    <div class="card gradient-card custom-card">
+                        <div class="card-header d-flex justify-content-between">
+                            <small class="text-white" th:text="${#dates.format(list.date, 'yyyy-MM-dd')}"></small>
+                            <small class="text-white" th:text="${#dates.format(list.date, 'HH:mm')}"></small>
+                        </div>
+                        <img class="card-img-top" th:src="@{'/display?id=' + ${list.id}}" alt="Memory Image" style="width: 100%; height: auto;">
+                        <div class="card-body">
+                            <p class="card-text" th:text="${list.note}"></p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-between">
+                                <a th:href="@{'/update?id=' + ${list.id} + '&userId=' + ${list.user.id}}">
+                                    <button type="button" class="button-29">Edit</button>
+                                </a>
+                                <a th:href="@{'/delete?id=' + ${list.id} + '&userId=' + ${list.user.id}}">
+                                    <button type="button" class="button-28">Remove</button>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -264,6 +334,9 @@
         </div>
     </div>
 </div>
+	
+
+
 
 
 <!-- Bootstrap JS (if not already included) -->

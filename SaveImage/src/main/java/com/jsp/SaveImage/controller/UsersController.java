@@ -86,7 +86,7 @@ public class UsersController {
 		
 		if(userDB!=null) {
 			modelAndView.setViewName("index");
-			modelAndView.addObject("success", "Registration successful! Please log in.");
+			modelAndView.addObject("success", "Registration successful! Please login.");
 		} else {
 			modelAndView.setViewName("register");
 			modelAndView.addObject("error", "Registration failed. Email may already be in use.");
